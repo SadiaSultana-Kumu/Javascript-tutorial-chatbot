@@ -1,0 +1,26 @@
+{
+  "name": "javascript-tutorial-chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SadiaSultana-Kumu/Javascript-tutorial-chatbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SadiaSultana-Kumu/Javascript-tutorial-chatbot/issues"
+  },
+  "homepage": "https://github.com/SadiaSultana-Kumu/Javascript-tutorial-chatbot#readme",
+  "dependencies": {
+    "@google-cloud/dialogflow": "^5.4.0",
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  }
+}

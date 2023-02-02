@@ -17,8 +17,6 @@ const sessionPath = sessionClient.projectAgentSessionPath(projectId = process.en
 // Text Query Route
 
 router.post('/text-query', async (req, res) => {
-    console.log("req==>", req.body);
-    console.log("req2==>", req.headers.who);
     //We need to send some information that comes from the client to Dialogflow API 
     // The text query request.
     const request = {
@@ -45,32 +43,5 @@ router.post('/text-query', async (req, res) => {
     res.send(result)
 })
 
-
-
-//Event Query Route
-
-router.post('/event-query', async (req, res) => {
-    //We need to send some information that comes from the client to Dialogflow API 
-    // The text query request.
-    const request = {
-        session: sessionPath,
-        queryInput: {
-            event: {
-                // The query to send to the dialogflow agent
-                name: req.body.event,
-                // The language used by the client (en-US)
-                languageCode: process.env.LANGUAGE_CODE,
-            },
-        },
-    };
-
-    // Send request and log result
-    const responses = await sessionClient.detectIntent(request);
-    console.log('Detected intent');
-    const result = responses[0].queryResult;
-    console.log(`  Query: ${result.queryText}`);
-    console.log(`  Response: ${result.fulfillmentText}`);
-    res.send(result)
-})
 
 module.exports = router;

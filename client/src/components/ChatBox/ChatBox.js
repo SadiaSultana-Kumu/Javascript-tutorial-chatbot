@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Chatbox.css';
 import DialogFlowService from '../../service/DialogFlowService';
+import Message from '../Message/Message';
 
 const ChatBox = () => {
-    const [data, setData] = useState({});
+    const [data, setData] = useState([]);
 
 
 
@@ -13,10 +14,10 @@ const ChatBox = () => {
             if (!e.target.value) {
                 return alert('you need to type somthing first')
             }
-
+            setData(data => [...data, { who: "user", msg: e.target.value }])
             //we will send request to text query route 
-            const res = await DialogFlowService.addTextQuery({[e.target.name]: e.target.value })
-            console.log("res==>", res?.data?.fulfillmentMessages?.[0]);
+            const res = await DialogFlowService.addTextQuery({ [e.target.name]: e.target.value })
+            setData(data => [...data, { who: "bot", msg: res?.data?.fulfillmentText }])
 
             e.target.value = "";
         }
@@ -30,7 +31,12 @@ const ChatBox = () => {
             height: 620, width: 700,
             border: '3px solid black', borderRadius: '7px'
         }}>
-            <div style={{ height: 564, width: '100%', overflow: 'auto' }}>
+            <div style={{ height: 564, width: '100%', overflow: 'auto' }} >
+                {
+                    data?.map((message, i) => (
+                        <Message msgData={message.msg} userType={message.who}/>
+                    ))
+                }
             </div>
             <input
                 style={{
